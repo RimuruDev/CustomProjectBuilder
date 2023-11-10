@@ -1,4 +1,4 @@
-﻿// **************************************************************** //
+// **************************************************************** //
 //
 //   Copyright (c) RimuruDev. All rights reserved.
 //   Contact me: 
@@ -9,6 +9,7 @@
 //
 // **************************************************************** //
 
+// Hotkey Ctrl + F1
 // Download the finished package from Relese and import it.
 // Or download this script, transfer it to any Editor folder in the Unity project.
 // Now in the upper part of the Unity editor you will see the panel for building the project.
@@ -28,11 +29,12 @@ namespace RimuruDev.External.RimuruDevUtils.CustomProjectBuilder
 {
     public sealed class CustomBuildAndRun
     {
+        private const string Hotkey = "%F1";
         private const string BuildFolferName = "Builds";
         private const string ApplicationExecutionFormat = ".exe";
         private static readonly string ProductName = PlayerSettings.productName;
 
-        [MenuItem("RimuruDev Tools/Build and Run + Play Editor Mode")]
+        [MenuItem("RimuruDev Tools/Build and Run + Play Editor Mode" + Hotkey)]
         public static void BuildAndRun()
         {
             var buildPath = Path.Combine(GetProgetPath(), BuildFolferName);
