@@ -39,6 +39,8 @@
 - Now in the upper part of the Unity editor you will see the panel for building the project.
 - After clicking on build, the script will build the project and immediately launch it, as well as launch the project in open Unity (Enter Play Mode).
 
+# Hotkey - ctrl + F1
+
 ![image](https://github.com/RimuruDev/CustomProjectBuilder/assets/85500556/de1c9ebb-5196-4275-9631-4276eebf7a8b)
 
 # TODO:
