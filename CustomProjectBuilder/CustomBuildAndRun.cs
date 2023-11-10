@@ -34,7 +34,7 @@ namespace RimuruDev.External.RimuruDevUtils.CustomProjectBuilder
         private const string ApplicationExecutionFormat = ".exe";
         private static readonly string ProductName = PlayerSettings.productName;
 
-        [MenuItem("RimuruDev Tools/Build and Run + Play Editor Mode" + Hotkey)]
+        [MenuItem("RimuruDev Tools/Build and Run + Play Editor Mode " + Hotkey)]
         public static void BuildAndRun()
         {
             var buildPath = Path.Combine(GetProgetPath(), BuildFolferName);
