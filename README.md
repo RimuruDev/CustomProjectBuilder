@@ -40,3 +40,9 @@
 - After clicking on build, the script will build the project and immediately launch it, as well as launch the project in open Unity (Enter Play Mode).
 
 ![image](https://github.com/RimuruDev/CustomProjectBuilder/assets/85500556/de1c9ebb-5196-4275-9631-4276eebf7a8b)
+
+# TODO:
+- Fix the inability to build if the script is lying with some Assembly Defenition
+- Handle exceptions if no project name is specified or the path is not correct. I need to make it so that a warning warning is displayed, but the project is still built.
+- Handle exceptions if scenes have not been set in Build in scenes. Automatically search for a Boot-like scene. Or search for user scenes to auto-fill and successfully build.
+- Add Window with customizations.
