@@ -41,7 +41,7 @@
 
 # Hotkey - ctrl + F1
 
-![image](https://github.com/RimuruDev/CustomProjectBuilder/assets/85500556/de1c9ebb-5196-4275-9631-4276eebf7a8b)
+![image](https://github.com/RimuruDev/CustomProjectBuilder/assets/85500556/82c0e829-66e8-482b-8bb6-6d4e56363c72)
 
 # TODO:
 - Fix the inability to build if the script is lying with some Assembly Defenition
