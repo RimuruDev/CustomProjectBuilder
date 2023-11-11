@@ -73,7 +73,8 @@ RimuruDev Tools/Build and Run + Play Editor Mode %F1
 
 ## Dependencies
 Unity Editor: Ensure you have Unity Editor installed.
-Nakama Server: A running instance of Nakama Server is required for multiplayer testing.
+
+[//]: # (Nakama Server: A running instance of Nakama Server is required for multiplayer testing.)
 
 ## Contributing
 If you have suggestions for improving the utility or have encountered issues, please feel free to contribute:
