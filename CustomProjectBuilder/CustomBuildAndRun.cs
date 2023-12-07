@@ -9,12 +9,6 @@
 //
 // **************************************************************** //
 
-// Hotkey Ctrl + F1
-// Download the finished package from Relese and import it.
-// Or download this script, transfer it to any Editor folder in the Unity project.
-// Now in the upper part of the Unity editor you will see the panel for building the project.
-// After clicking on build, the script will build the project and immediately launch it, as well as launch the project in open Unity (Enter Play Mode).
-
 using System;
 using System.IO;
 using System.Linq;
@@ -27,31 +21,70 @@ using UnityEditor.Build.Reporting;
 
 namespace RimuruDev.External.RimuruDevUtils.CustomProjectBuilder
 {
-    public sealed class CustomBuildAndRun
+    public sealed class CustomBuildAndRun : EditorWindow
     {
         private const string Hotkey = "%F1";
-        private const string BuildFolferName = "Builds";
+        private const string BuildFolderName = "Builds";
         private const string ApplicationExecutionFormat = ".exe";
         private static readonly string ProductName = PlayerSettings.productName;
 
+        private int numberOfPlayers = 1;
+
         [MenuItem("RimuruDev Tools/Build and Run + Play Editor Mode " + Hotkey)]
-        public static void BuildAndRun()
+        public static void ShowWindow()
         {
-            var buildPath = Path.Combine(GetProgetPath(), BuildFolferName);
+            GetWindow(typeof(CustomBuildAndRun));
+        }
 
-            Directory.CreateDirectory(buildPath);
+        private void OnGUI()
+        {
+            GUILayout.Label("Build Settings", EditorStyles.boldLabel);
 
-            var scenes = GetScenesInBuild();
+            numberOfPlayers = EditorGUILayout.IntField("Number of Players:", numberOfPlayers);
 
-            if (scenes.Count == 0)
+            if (GUILayout.Button("Build and Run"))
             {
-                Debug.LogError("No scenes are enabled in the build settings");
-                return;
+                var buildConfigs = GenerateBuildConfigurations(numberOfPlayers);
+                foreach (var buildConfig in buildConfigs)
+                {
+                    BuildAndRunInstance(buildConfig);
+                }
+            }
+        }
+
+        private static List<BuildPlayerOptions> GenerateBuildConfigurations(int numberOfPlayers)
+        {
+            var buildConfigs = new List<BuildPlayerOptions>();
+
+            for (int i = 0; i < numberOfPlayers; i++)
+            {
+                var scenes = GetScenesInBuild();
+                var buildPath = Path.Combine(GetProjectPath(), BuildFolderName, $"{ProductName}_Players_{i + 1}");
+
+                Directory.CreateDirectory(buildPath);
+
+                var buildPlayerOptions = SetupProjectSettingsForBuild(scenes, buildPath);
+                buildConfigs.Add(buildPlayerOptions);
             }
 
-            var buildPlayerOptions = SetupProjectSettingsForBuild(scenes, buildPath);
+            return buildConfigs;
+        }
 
-            BuildProject(buildPlayerOptions, buildPath);
+        private static void BuildAndRunInstance(BuildPlayerOptions buildPlayerOptions)
+        {
+            var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
+            var summary = report.summary;
+
+            if (summary.result == BuildResult.Succeeded)
+            {
+                Process.Start(Path.Combine(buildPlayerOptions.locationPathName));
+
+                EditorApplication.isPlaying = true;
+            }
+            else if (summary.result == BuildResult.Failed)
+            {
+                Debug.LogError("Build failed");
+            }
         }
 
         private static BuildPlayerOptions SetupProjectSettingsForBuild(List<string> scenes, string buildPath)
@@ -66,7 +99,7 @@ namespace RimuruDev.External.RimuruDevUtils.CustomProjectBuilder
             return buildPlayerOptions;
         }
 
-        private static string GetProgetPath()
+        private static string GetProjectPath()
         {
             var path = Path.GetDirectoryName(Application.dataPath);
 
@@ -80,22 +113,5 @@ namespace RimuruDev.External.RimuruDevUtils.CustomProjectBuilder
             .Where(scene => scene.enabled)
             .Select(scene => scene.path)
             .ToList();
-
-        private static void BuildProject(BuildPlayerOptions buildPlayerOptions, string buildPath)
-        {
-            var report = BuildPipeline.BuildPlayer(buildPlayerOptions);
-            var summary = report.summary;
-
-            if (summary.result == BuildResult.Succeeded)
-            {
-                Process.Start(Path.Combine(buildPath, ProductName + ApplicationExecutionFormat));
-
-                EditorApplication.isPlaying = true;
-            }
-            else if (summary.result == BuildResult.Failed)
-            {
-                Debug.LogError("Build failed");
-            }
-        }
     }
 }
