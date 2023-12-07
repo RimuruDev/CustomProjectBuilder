@@ -33,7 +33,7 @@
 
 ## Overview
 
-Custom Build and Run is a Unity editor extension designed to streamline the testing and development process of multiplayer games using Unity and Nakama Server. With just a single command, it automates the building and launching of a standalone game instance alongside entering Play Mode in the Unity Editor, allowing you to test matchmaking and in-game interactions seamlessly.
+Custom Build and Run is a Unity editor extension designed to streamline the testing and development process of multiplayer games using Unity and Nakama Server. With just a single command, it automates the building and launching of multiple standalone game instances alongside entering Play Mode in the Unity Editor, allowing you to test matchmaking and in-game interactions seamlessly.
 
 ## Why Use Custom Build and Run?
 
@@ -41,8 +41,8 @@ This utility addresses the common challenge of testing multiplayer interactions 
 
 ## Features
 
-- **One-Click Build and Run**: Compile and run a standalone game instance with preconfigured settings using a single menu command or hotkey.
-- **Simultaneous Editor Play Mode**: Automatically enters Play Mode in the Unity Editor post-build, enabling immediate testing of multiplayer features.
+- **One-Click Build and Run**: Compile and run multiple standalone game instances with preconfigured settings using a single menu command or hotkey.
+- **Simultaneous Editor Play Mode**: Automatically enters Play Mode in the Unity Editor post-build for each instance, enabling immediate testing of multiplayer features.
 - **Streamlined Workflow**: Focus on development and testing rather than repetitive setup tasks, enhancing productivity and iteration speed.
 
 ## Installation
@@ -59,14 +59,13 @@ After installation, the utility can be triggered via the editor menu `RimuruDev 
 
 Use the menu command or hotkey to initiate the build. The utility will:
 
-- Compile the game into a predefined build folder.
-- Launch the built game instance.
-- Enter Play Mode in the Unity Editor automatically.
+- Compile the game into a predefined build folder for each instance.
+- Launch each built game instance.
+- Enter Play Mode in the Unity Editor automatically for each instance.
 
 ```plaintext
 RimuruDev Tools/Build and Run + Play Editor Mode %F1
 ```
-# Hotkey - ctrl + F1
 
 ![image](https://github.com/RimuruDev/CustomProjectBuilder/assets/85500556/82c0e829-66e8-482b-8bb6-6d4e56363c72)
 
