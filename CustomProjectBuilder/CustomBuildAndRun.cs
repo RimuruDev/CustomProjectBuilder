@@ -26,7 +26,7 @@ namespace RimuruDev.External.RimuruDevUtils.CustomProjectBuilder
         private const string Hotkey = "%F1";
         private const string BuildFolderName = "Builds";
         private const string ApplicationExecutionFormat = ".exe";
-        private static readonly string ProductName = PlayerSettings.productName;
+        private static string ProductName => PlayerSettings.productName;
 
         private int numberOfPlayers = 1;
 
